@@ -1,55 +1,93 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
-class MyBackground extends StatelessWidget {
+class MyBackground extends StatefulWidget {
   final Widget child;
 
   const MyBackground({Key? key, required this.child}) : super(key: key);
+
+  @override
+  _MyBackgroundState createState() => _MyBackgroundState();
+}
+
+class _MyBackgroundState extends State<MyBackground>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         // الدائرة الزرقاء في الخلفية
-        Positioned(
-          top: -50,
-          left: -50,
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.blue.withOpacity(0.3),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
+        AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            double animatedX = 50 * math.sin(_controller.value * 2 * math.pi);
+            double animatedY = 50 * math.cos(_controller.value * 2 * math.pi);
+            return Positioned(
+              top: -50 + animatedY,
+              left: -50 + animatedX,
               child: Container(
-                color: Colors.transparent,
+                width: 250,
+                height: 250,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.blue.withOpacity(0.3),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
         // الدائرة الوردية في الخلفية
-        Positioned(
-          bottom: -50,
-          right: -50,
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.pink.withOpacity(0.3),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
+        AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            double animatedX = 50 * math.cos(_controller.value * 2 * math.pi);
+            double animatedY = 50 * math.sin(_controller.value * 2 * math.pi);
+            return Positioned(
+              bottom: -50 + animatedY,
+              right: -50 + animatedX,
               child: Container(
-                color: Colors.transparent,
+                width: 250,
+                height: 250,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.pink.withOpacity(0.3),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
         // المحتوى الرئيسي
-        child,
+        widget.child,
       ],
     );
   }

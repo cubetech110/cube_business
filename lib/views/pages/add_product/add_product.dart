@@ -13,6 +13,7 @@ class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddProductScreenState createState() => _AddProductScreenState();
 }
 
@@ -29,23 +30,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('إضافة منتج'),
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back_ios),
-      //     onPressed: () {
-      //       Navigator.pop(context); // العودة إلى الشاشة السابقة
-      //     },
-      //   ),
-      // ),
-
-
-      
       body: MyBackground(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: [
-            SizedBox(height: 120,),
+            const SizedBox(height: 120,),
           Stack(
             children: [
               Padding(
@@ -131,12 +120,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
           
                             // Upload images and get URLs
                             List<String> imageUrls = [];
-                            for (File? imageFile in selectedImages) {
-                              if (imageFile != null) {
-                                String imageUrl = await uploadImage(imageFile);
-                                imageUrls.add(imageUrl);
-                              }
-                            }
+                      // Inside the upload function
+for (File? imageFile in selectedImages) {
+  if (imageFile != null) {
+    print('Uploading image: ${imageFile.path}'); // Log the path to check if duplicates exist
+    String imageUrl = await uploadImage(imageFile);
+    imageUrls.add(imageUrl);
+  }
+}
+
           
                             // Create the product with the image URLs
                             Product newProduct = Product(

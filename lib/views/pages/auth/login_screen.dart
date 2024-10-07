@@ -1,14 +1,14 @@
-import 'package:cube_business/core/helper/nav_helper.dart';
-import 'package:cube_business/services/auth_service.dart';
-import 'package:cube_business/views/pages/auth/signup_screen.dart';
+import 'package:cube_business/provider/auth_provider.dart';
 import 'package:cube_business/views/pages/add%20store/add_store.dart';
 import 'package:cube_business/views/pages/home/home_screen.dart';
+import 'package:cube_business/views/pages/auth/signup_screen.dart';
 import 'package:cube_business/views/widgets/my_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_business/views/pages/auth/widgets/auth_button.dart';
 import 'package:cube_business/views/pages/auth/widgets/auth_textfiled.dart';
 import 'package:cube_business/views/pages/auth/widgets/social_signIn_button.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,74 +18,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
-
-  bool _isLoading = false;
-  String? _errorMessage;
-
-  void _showError(String message) {
-    setState(() {
-      _errorMessage = message;
-    });
-  }
-
-  void _hideError() {
-    setState(() {
-      _errorMessage = null;
-    });
-  }
-
-  Future<void> _login() async {
-    setState(() {
-      _isLoading = true;
-      _hideError();
-    });
-
-    final user = await _authService.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (user == null) {
-      _showError('Failed to sign in. Please check your credentials.');
-      return;
-    }
-
-    final currentUserData = await _authService.getCurrentUserData();
-
-    if (currentUserData == null) {
-      _showError('No user data found. Please try again.');
-    } else {
-      navigateAndRemove(context, const EnterDetailsScreen());
-    }
-  }
-
-  Future<void> _loginWithGoogle() async {
-    setState(() {
-      _isLoading = true;
-      _hideError();
-    });
-
-    final user = await _authService.signInWithGoogle();
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (user == null) {
-      _showError('Failed to sign in with Google. Please try again.');
-      return;
-    }
-
-    navigateAndRemove(context,  HomeScreen());
-  }
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<Auth_Provider>(context);
+
     return Scaffold(
       body: MyBackground(
         child: Padding(
@@ -138,25 +75,50 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       const SizedBox(height: 20),
-                      if (_errorMessage != null)
+                      if (authProvider.errorMessage != null)
                         Text(
-                          _errorMessage!,
+                          authProvider.errorMessage!,
                           style: const TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       const SizedBox(height: 10),
-                      _isLoading
+                      authProvider.isLoading
                           ? const CircularProgressIndicator()
                           : AuthButton(
                               text: 'تسجيل الدخول',
-                              onPressed: _login,
+                              onPressed: () async {
+                                await authProvider.signInWithEmailAndPassword(
+                                  email:emailController.text,
+                                  password:passwordController.text,
+                                  context: context
+                                );
+                                if (authProvider.currentUser != null) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EnterDetailsScreen(),
+                                    ),
+                                  );
+                                }
+                              },
                             ),
                       const SizedBox(height: 10),
                       SocialSignInButton(
                         signInType: SignInType.Google,
-                        onPressed: _loginWithGoogle,
+                        onPressed: () async {
+                          await authProvider.signInWithGoogle(context);
+                          if (authProvider.currentUser != null) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(),
+                              ),
+                            );
+                          }
+                        },
                       ),
                       const SizedBox(height: 10),
                       SocialSignInButton(
@@ -193,7 +155,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () {
-                          navigateAndRemove(context, SignupScreen());
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignupScreen(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'أو انشئ حساب',

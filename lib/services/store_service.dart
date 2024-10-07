@@ -1,12 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cube_business/model/store_model.dart';
-import 'package:cube_business/model/user_model.dart';
 import 'package:cube_business/services/user_service.dart';
 
 class StoreService {
   final CollectionReference storeCollection =
       FirebaseFirestore.instance.collection('stores');
 
+  // Fetch store by ID
+  Future<Store?> getStoreById(String storeId) async {
+    try {
+      DocumentSnapshot doc = await storeCollection.doc(storeId).get();
+      if (doc.exists) {
+        return Store.fromFirestore(doc.data() as Map<String, dynamic>, doc.id);
+      }
+    } catch (e) {
+      print("Error fetching store: $e");
+    }
+    return null; // Return null if store not found
+  }
 Future<void> addStore(Store store) async {
   // إنشاء معرف فريد لـ storeId
   final String storeId = FirebaseFirestore.instance.collection('stores').doc().id;
@@ -18,29 +29,13 @@ Future<void> addStore(Store store) async {
   store.id = storeId;
   await storeCollection.doc(storeId).set(store.toFirestore());
 }
-
-  Future<void> updateStore(Store store) {
-    return storeCollection.doc(store.id).update(store.toFirestore());
+  // Update store data
+  Future<void> updateStore(String storeId, Map<String, dynamic> newData) async {
+    try {
+      await storeCollection.doc(storeId).update(newData);
+    } catch (e) {
+      print("Error updating store: $e");
+      throw e;
+    }
   }
-
-  Future<void> deleteStore(String id) {
-    return storeCollection.doc(id).delete();
-  }
-
-  // Future<Store?> getStoreById(String id) async {
-  //   DocumentSnapshot doc = await storeCollection.doc(id).get();
-  //   if (doc.exists) {
-  //     return Store.fromFirestore(doc.data() as Map<String, dynamic>, doc.id);
-  //   }
-  //   return null;
-  // }
-
-  // Stream<List<Store>> getAllStores() {
-  //   return storeCollection.snapshots().map((snapshot) {
-  //     return snapshot.docs
-  //         .map((doc) =>
-  //             Store.fromFirestore(doc.data() as Map<String, dynamic>, doc.id))
-  //         .toList();
-  //   });
-  // }
 }

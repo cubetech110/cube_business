@@ -17,6 +17,6 @@ class AuthWrapper extends StatelessWidget {
       // NotificationsService().savePlayerIdToFirestore(
       //     OneSignal.User.pushSubscription.id.toString(), user.uid);
     }
-    return user == null ?  LoginScreen() :  HomeScreen();
+    return user == null ? LoginScreen() : HomeScreen();
   }
 }

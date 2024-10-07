@@ -63,7 +63,6 @@ class AuthService {
           email: email,
           subscribe: Timestamp.now(),
           fullName: fullName,
-          storeId: '',
           createdAt: Timestamp.now(),
           role: 'owner',
         );
@@ -135,7 +134,6 @@ class AuthService {
             email: user.email!,
             subscribe: Timestamp.now(),
             fullName: user.displayName!,
-            storeId: '',
             createdAt: Timestamp.now(),
             role: 'owner',
           );
@@ -176,7 +174,6 @@ class AuthService {
             email: user.email!,
             subscribe: Timestamp.now(),
             fullName: user.displayName!,
-            storeId: '',
             createdAt: Timestamp.now(),
             role: 'owner',
           );

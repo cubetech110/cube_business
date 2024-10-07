@@ -1,9 +1,13 @@
 import 'package:cube_business/core/app_theme.dart';
+import 'package:cube_business/provider/auth_provider.dart';
+import 'package:cube_business/provider/user_provider.dart';
+import 'package:cube_business/provider/store_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
 import 'package:cube_business/views/pages/add_product/add_product.dart';
 import 'package:cube_business/views/pages/auth/auth_wrapper.dart';
+import 'package:cube_business/views/pages/auth/login_screen.dart';
 import 'package:cube_business/views/pages/home/home_screen.dart';
-import 'package:cube_business/views/pages/products/product_screen.dart';
+import 'package:cube_business/views/pages/products/product_list_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +17,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // تهيئة Firebase
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +27,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => Auth_Provider()),
+        ChangeNotifierProvider(
+          create: (_) => StoreProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
         StreamProvider<User?>.value(
           value: AuthService().authStateChanges,
           initialData: null,
@@ -31,22 +42,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Cube Business',
-
         theme: AppTheme.lightTheme,
         home: AuthWrapper(),
-
-        // تحديد اللغة الافتراضية للعربية
         locale: const Locale('ar'),
-
-        // دعم الاتجاه من اليمين إلى اليسار
-        builder: (context, widget) {
-          return Directionality(
-            textDirection: TextDirection.rtl,
-            child: widget!,
-          );
-        },
-
-        // إعدادات التوطين والدعم للغات الأخرى
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

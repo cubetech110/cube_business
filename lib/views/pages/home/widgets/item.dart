@@ -70,7 +70,7 @@ class Items extends StatelessWidget {
                   Text(
                     percentage!,
                     style: TextStyle(
-                      color: Colors.green[300],
+                      color: progressColor,
                       fontSize: 16,
                     ),
                   ),

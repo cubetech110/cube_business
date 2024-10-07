@@ -1,9 +1,10 @@
 import 'package:cube_business/core/helper/nav_helper.dart';
-import 'package:cube_business/services/auth_service.dart';
+import 'package:cube_business/provider/auth_provider.dart';
 import 'package:cube_business/views/pages/auth/login_screen.dart';
-import 'package:cube_business/views/widgets/my_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cube_business/views/widgets/my_background.dart';
 import 'package:cube_business/views/pages/auth/widgets/auth_button.dart';
 import 'package:cube_business/views/pages/auth/widgets/auth_textfiled.dart';
 import 'package:cube_business/views/pages/auth/widgets/social_signIn_button.dart';
@@ -11,12 +12,12 @@ import 'package:cube_business/views/pages/auth/widgets/social_signIn_button.dart
 class SignupScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
-  final AuthService _authService = AuthService();
-
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final auth_Provider = Provider.of<Auth_Provider>(context);
+
     return Scaffold(
       body: MyBackground(
         child: Padding(
@@ -24,10 +25,7 @@ class SignupScreen extends StatelessWidget {
           child: Center(
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth:
-                      600, // عرض محدد للحفاظ على التناسب على الشاشات الكبيرة
-                ),
+                constraints: const BoxConstraints(maxWidth: 600),
                 child: Form(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -36,44 +34,39 @@ class SignupScreen extends StatelessWidget {
                       const Text(
                         'قم بإنشاء حسابك 🤩',
                         style: TextStyle(
-                          fontSize: 24, // حجم الخط
-                          fontWeight: FontWeight.bold, // سماكة الخط
-                          color: Colors.black87, // لون الخط
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: fullNameController,
                         labelText: 'الاسم',
-                        hintText: '',
-                        keyboardType: TextInputType.emailAddress,
-                        icon: Icons.email,
+                        icon: Icons.person,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
                           }
                           return null;
-                        },
+                        }, hintText: '',
                       ),
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: emailController,
                         labelText: 'البريد الالكتروني',
-                        hintText: '',
-                        keyboardType: TextInputType.emailAddress,
                         icon: Icons.email,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
                           return null;
-                        },
+                        }, hintText: '',
                       ),
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: passwordController,
                         labelText: 'كلمة المرور',
-                        hintText: 'كلمة المرور',
                         obscureText: true,
                         icon: Icons.lock,
                         validator: (value) {
@@ -81,33 +74,45 @@ class SignupScreen extends StatelessWidget {
                             return 'Please enter your password';
                           }
                           return null;
-                        },
+                        }, hintText: '',
                       ),
                       const SizedBox(height: 20),
-                      AuthButton(
-                        text: 'تسجيل',
-                        onPressed: () async {
-                          await _authService.registerWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text,
-                              fullName: fullNameController.text);
-                        },
-                      ),
+                      auth_Provider.isLoading
+                          ? CircularProgressIndicator()
+                          : AuthButton(
+                              text: 'تسجيل',
+                              onPressed: () {
+                                auth_Provider.registerWithEmailAndPassword(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  fullName: fullNameController.text,
+                                  context: context,
+                                );
+                              },
+                            ),
                       const SizedBox(height: 10),
                       SocialSignInButton(
                         signInType: SignInType.Google,
                         onPressed: () {
-                          // منطق تسجيل الدخول عبر Google
+                          auth_Provider.signInWithGoogle(context);
                         },
                       ),
                       const SizedBox(height: 10),
                       SocialSignInButton(
                         signInType: SignInType.Apple,
                         onPressed: () {
-                          // منطق تسجيل الدخول عبر Apple
+                          auth_Provider.signInWithApple(context);
                         },
                       ),
                       const SizedBox(height: 20),
+                      if (auth_Provider.errorMessage != null)
+                        Text(
+                          auth_Provider.errorMessage!,
+                          style: TextStyle(color: Colors.red),
+                        ),
+
+
+
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -149,6 +154,7 @@ class SignupScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
                     ],
                   ),
                 ),

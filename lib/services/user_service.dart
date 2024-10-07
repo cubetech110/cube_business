@@ -13,7 +13,12 @@ class UserService {
 
   // تحديث بيانات مستخدم موجود
   Future<void> updateUser(UserModel user) {
-    return userCollection.doc(user.id).update(user.toFirestore());
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+
+
+
+    return userCollection.doc(currentUser!.uid).update(user.toFirestore());
   }
   Future<void> updateStoreId(String storeId) async {
     String userId =  FirebaseAuth.instance.currentUser!.uid;

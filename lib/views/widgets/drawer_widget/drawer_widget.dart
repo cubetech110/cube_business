@@ -1,5 +1,7 @@
 import 'package:cube_business/core/asset_paths.dart';
 import 'package:cube_business/core/color_constant.dart';
+import 'package:cube_business/provider/user_provider.dart';
+import 'package:cube_business/views/widgets/confirm_dilog.dart';
 import 'package:cube_business/views/widgets/drawer_widget/customDrawerHeader.dart';
 import 'package:cube_business/views/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +99,9 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('تسجيل خروج'),
             onTap: () {
+
+
+              showConfirmDialog(context: context, title: 'تسجيل الخروج', content: 'هل انت متاكد من انك تريد تسيل الخروج', onConfirm: () { UserProvider().signOut(context); });
               // Handle logout
             },
           ),
