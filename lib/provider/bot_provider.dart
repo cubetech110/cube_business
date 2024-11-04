@@ -8,7 +8,7 @@ class BotProvider extends ChangeNotifier {
   final String psid = 'flutter_user_${DateTime.now().millisecondsSinceEpoch}';
   
   final List<Message> _messages = [
-    Message(text: 'يا مرحبا والله!، انا مساعدك الشخصي تفضل!', isUser: false)
+    Message(text: 'Hi, How can help u?', isUser: false)
   ];
   
   List<Message> get messages => _messages;

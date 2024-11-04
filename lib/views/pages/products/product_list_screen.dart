@@ -51,9 +51,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('قائمة المنتجات'),
-      // ),
+      appBar: AppBar(
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           navigateTo(context, const AddProductScreen());

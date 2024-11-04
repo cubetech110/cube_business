@@ -32,7 +32,7 @@ class Items extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 150, // Set a fixed height for all cards
+        height: 200, // Set a fixed height for all cards
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: backgroundColor,

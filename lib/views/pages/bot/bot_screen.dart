@@ -47,7 +47,7 @@ class BotScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                           Text(
-                                    message.isUser?'انت:':'مكعب:',
+                                    message.isUser?'you:':'Brzah:',
                                     style: TextStyle(
                                       color: message.isUser
                                           ? Colors.white.withOpacity(0.7)
@@ -73,13 +73,32 @@ class BotScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                if (botProvider.sendingMessage) const Text('جاري التحميل...'),
+                if (botProvider.sendingMessage) const Text('Loading..'),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 8.0),
                   child: Row(
                     children: <Widget>[
-                      Container(
+
+                      Expanded(
+                        child: TextField(
+                          controller: botProvider.messageController,
+                          decoration: InputDecoration(
+                            hintText: 'Write...',
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 3.0, vertical: 10.0),
+                          ),
+                          enabled: !botProvider.sendingMessage,
+                        ),
+                      ),
+
+                      const SizedBox(width: 10),
+
+                                            Container(
                         width: 40,
                         height: 40,
                         decoration: const BoxDecoration(
@@ -100,22 +119,6 @@ class BotScreen extends StatelessWidget {
                                     botProvider.messageController.clear();
                                   }
                                 },
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          controller: botProvider.messageController,
-                          decoration: InputDecoration(
-                            hintText: 'اكتب هنا',
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 3.0, vertical: 10.0),
-                          ),
-                          enabled: !botProvider.sendingMessage,
                         ),
                       ),
                     ],

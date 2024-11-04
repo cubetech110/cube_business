@@ -79,8 +79,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       const SizedBox(height: 20),
                       _buildStoreNameField(),
                       const SizedBox(height: 20),
-                      // _buildEmailField(),
-                      // const SizedBox(height: 20),
                       _buildStoreTypeDropdown(),
                       const SizedBox(height: 40),
                       _buildSubmitButton(),
@@ -97,12 +95,12 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   Widget _buildStoreNameField() {
     return CustomTextField(
-      label: 'اسم المتجر',
-      hintText: 'أدخل اسم المتجر',
+      label: 'Store Name',
+      hintText: 'Enter store name',
       controller: _storeNameController,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'الرجاء إدخال اسم المتجر';
+          return 'Please enter the store name';
         }
         return null;
       },
@@ -111,12 +109,12 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   Widget _buildEmailField() {
     return CustomTextField(
-      label: 'البريد الإلكتروني',
-      hintText: 'أدخل البريد الإلكتروني',
+      label: 'Email',
+      hintText: 'Enter email address',
       controller: _emailController,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'الرجاء إدخال البريد الإلكتروني';
+          return 'Please enter your email address';
         }
         return null;
       },
@@ -125,8 +123,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   Widget _buildStoreTypeDropdown() {
     return CustomDropdown(
-      label: 'نوع المتجر',
-      hintText: 'اختر نوع متجرك',
+      label: 'Store Type',
+      hintText: 'Select your store type',
       items: CategoryType.values,
       selectedItem: _selectedStoreType,
       onChanged: (CategoryType? newValue) {
@@ -147,7 +145,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
             ),
           )
         : CustomButton(
-            text: 'تفضل متجرك!',
+            text: 'Submit Your Store!',
             onPressed: _submitForm,
           );
   }
@@ -155,13 +153,13 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       if (_selectedStoreType == null) {
-        showErrorSnackBar('الرجاء اختيار نوع المتجر', context);
+        showErrorSnackBar('Please select a store type', context);
         return;
       }
 
       // Check if an image is selected, if not, show an error
       if (_imageFile == null) {
-        showErrorSnackBar('الرجاء اختيار صورة للمتجر', context);
+        showErrorSnackBar('Please choose an image for the store', context);
         return;
       }
 

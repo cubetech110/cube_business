@@ -19,7 +19,7 @@ class NoProduct extends StatelessWidget {
                     ),
                     const Center(
                       child: Text(
-                        'لا توجد منتجات',
+                        'no product',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

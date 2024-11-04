@@ -32,7 +32,7 @@ class SignupScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 30),
                       const Text(
-                        'قم بإنشاء حسابك 🤩',
+                        '',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -42,31 +42,33 @@ class SignupScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: fullNameController,
-                        labelText: 'الاسم',
+                        labelText: 'Name',
                         icon: Icons.person,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
                           }
                           return null;
-                        }, hintText: '',
+                        },
+                        hintText: '',
                       ),
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: emailController,
-                        labelText: 'البريد الالكتروني',
+                        labelText: 'Email',
                         icon: Icons.email,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
                           return null;
-                        }, hintText: '',
+                        },
+                        hintText: '',
                       ),
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: passwordController,
-                        labelText: 'كلمة المرور',
+                        labelText: 'Password',
                         obscureText: true,
                         icon: Icons.lock,
                         validator: (value) {
@@ -74,13 +76,14 @@ class SignupScreen extends StatelessWidget {
                             return 'Please enter your password';
                           }
                           return null;
-                        }, hintText: '',
+                        },
+                        hintText: '',
                       ),
                       const SizedBox(height: 20),
                       auth_Provider.isLoading
                           ? CircularProgressIndicator()
                           : AuthButton(
-                              text: 'تسجيل',
+                              text: 'Creat',
                               onPressed: () {
                                 auth_Provider.registerWithEmailAndPassword(
                                   email: emailController.text,
@@ -110,30 +113,27 @@ class SignupScreen extends StatelessWidget {
                           auth_Provider.errorMessage!,
                           style: TextStyle(color: Colors.red),
                         ),
-
-
-
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          text: 'عند التسجيل فأنت توافق على ',
+                          text: 'By signing up, you agree to the ',
                           style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 14,
                               fontFamily: 'cubefont'),
                           children: [
                             TextSpan(
-                              text: 'الشروط و الاحكام',
+                              text: 'Terms and Conditions',
                               style: const TextStyle(
-                                color: Colors.blue, // لون الرابط
-                                decoration:
-                                    TextDecoration.underline, // تحت الخط للرابط
+                                color: Colors.blue, // Link color
+                                decoration: TextDecoration
+                                    .underline, // Underline for the link
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  // تنفيذ عند النقر على الرابط
+                                  // Execute when tapping on the link
                                   print("Navigating to Terms and Conditions");
-                                  // يمكنك تنفيذ المنطق لفتح صفحة الشروط والأحكام هنا
+                                  // You can add logic here to open the Terms and Conditions page
                                 },
                             ),
                           ],
@@ -145,7 +145,7 @@ class SignupScreen extends StatelessWidget {
                           navigateAndRemove(context, LoginScreen());
                         },
                         child: const Text(
-                          'او سجل دخولك',
+                          'or Login',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.blue, // لون النص
@@ -154,7 +154,6 @@ class SignupScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

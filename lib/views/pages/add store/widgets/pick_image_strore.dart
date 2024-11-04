@@ -59,7 +59,7 @@ class _PickImageStoreState extends State<PickImageStore> {
         ),
         const SizedBox(height: 10),
         const Text(
-          'اضغط لتغيير صورة المتجر',
+          'click to change image',
           style: TextStyle(fontSize: 16, color: Colors.grey),
         ),
       ],

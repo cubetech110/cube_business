@@ -3,11 +3,7 @@ import 'package:cube_business/provider/auth_provider.dart';
 import 'package:cube_business/provider/user_provider.dart';
 import 'package:cube_business/provider/store_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
-import 'package:cube_business/views/pages/add_product/add_product.dart';
 import 'package:cube_business/views/pages/auth/auth_wrapper.dart';
-import 'package:cube_business/views/pages/auth/login_screen.dart';
-import 'package:cube_business/views/pages/home/home_screen.dart';
-import 'package:cube_business/views/pages/products/product_list_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,16 +40,16 @@ class MyApp extends StatelessWidget {
         title: 'Cube Business',
         theme: AppTheme.lightTheme,
         home: AuthWrapper(),
-        locale: const Locale('ar'),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('ar'), // اللغة العربية
-          Locale('en'), // اللغة الإنجليزية
-        ],
+        // locale: const Locale('ar'),
+        // localizationsDelegates: const [
+        //   GlobalMaterialLocalizations.delegate,
+        //   GlobalWidgetsLocalizations.delegate,
+        //   GlobalCupertinoLocalizations.delegate,
+        // ],
+        // supportedLocales: const [
+        //   Locale('ar'), // اللغة العربية
+        //   Locale('en'), // اللغة الإنجليزية
+        // ],
       ),
     );
   }

@@ -4,25 +4,27 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class ProductSalesChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // بيانات مبيعات المنتجات كمثال
+    // Example product sales data
     final List<SalesData> salesData = [
-      SalesData('كمه', 150),
-      SalesData('خنجر', 40),
-      SalesData('جلابية', 200),
-      SalesData('نظارة', 170),
-      SalesData('خنجر', 120),
+      SalesData('Kumma', 150),
+      SalesData('Dagger', 40),
+      SalesData('Jalabiya', 200),
+      SalesData('Glasses', 170),
+      SalesData('Dagger', 120),
     ];
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Center(
         child: Container(
-          decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
           padding: const EdgeInsets.all(16.0),
           child: SfCartesianChart(
-            
             primaryXAxis: CategoryAxis(),
-            title: ChartTitle(text: 'المبيعات الشهرية للمنتجات'),
+            title: ChartTitle(text: 'Monthly Sales of Products'),
             legend: Legend(isVisible: true),
             tooltipBehavior: TooltipBehavior(enable: true),
             series: <CartesianSeries>[
@@ -32,9 +34,9 @@ class ProductSalesChart extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 xValueMapper: (SalesData data, _) => data.productName,
                 yValueMapper: (SalesData data, _) => data.sales,
-                name: 'المبيعات',
-                isTrackVisible: true, // عرض الخلفية للشريط
-                dataLabelSettings: const DataLabelSettings(isVisible: true), // إظهار قيم المبيعات
+                name: 'Sales',
+                isTrackVisible: true, // Show background for the bar
+                dataLabelSettings: const DataLabelSettings(isVisible: true), // Display sales values
               ),
             ],
           ),
@@ -44,7 +46,7 @@ class ProductSalesChart extends StatelessWidget {
   }
 }
 
-// فئة تمثل بيانات المبيعات
+// Class representing sales data
 class SalesData {
   SalesData(this.productName, this.sales);
   final String productName;

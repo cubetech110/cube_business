@@ -114,19 +114,19 @@ class _EditProfileState extends State<EditProfile> {
                     const SizedBox(height: 24),
 
                     // Status section
-                    const Text(
-                      'القوالب',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        _buildStatusButton('تقليدي', Colors.black),
-                        _buildStatusButton('ملابس', Colors.red),
-                        _buildStatusButton('أغذية', Colors.orange),
-                        _buildStatusButton('تجميل', Colors.blue),
-                      ],
-                    ),
+                    // const Text(
+                    //   'القوالب',
+                    //   style: TextStyle(fontSize: 16, color: Colors.grey),
+                    // ),
+                    // const SizedBox(height: 12),
+                    // Row(
+                    //   children: [
+                    //     _buildStatusButton('تقليدي', Colors.black),
+                    //     _buildStatusButton('ملابس', Colors.red),
+                    //     _buildStatusButton('أغذية', Colors.orange),
+                    //     _buildStatusButton('تجميل', Colors.blue),
+                    //   ],
+                    // ),
                   ],
                 ),
               ],

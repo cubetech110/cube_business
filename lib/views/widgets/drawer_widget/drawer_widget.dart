@@ -12,12 +12,11 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // backgroundColor: AppColor.backgroundColor,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           CustomDrawerHeader(
-            accountName: 'متجر مكعب',
+            accountName: 'Cube Store',
             accountEmail: 'johndoe@example.com',
             backgroundImage: 'assets/icon/bg1.png',
             avatarImage: 'assets/images/admin.jpeg',
@@ -28,7 +27,7 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.houseSvg,
             ),
-            title: const Text('الرئيسية'),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
               // Navigate to Home
@@ -56,7 +55,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ],
             ),
-            title: const Text('اشعارات'),
+            title: const Text('Notifications'),
             onTap: () {},
           ),
           ListTile(
@@ -65,7 +64,7 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.infoSvg,
             ),
-            title: const Text('عنا'),
+            title: const Text('About Us'),
             onTap: () {},
           ),
           ListTile(
@@ -74,9 +73,9 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.contactSvg,
             ),
-            title: const Text('فريق الدعم'),
+            title: const Text('Support Team'),
             onTap: () {
-              // Handle logout
+              // Handle support
             },
           ),
           ListTile(
@@ -85,7 +84,7 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.infoSvg,
             ),
-            title: const Text('السياسات و الشروط'),
+            title: const Text('Policies and Terms'),
             onTap: () {
               Navigator.pop(context);
               // Navigate to Account
@@ -97,11 +96,16 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.logoutSvg,
             ),
-            title: const Text('تسجيل خروج'),
+            title: const Text('Log Out'),
             onTap: () {
-
-
-              showConfirmDialog(context: context, title: 'تسجيل الخروج', content: 'هل انت متاكد من انك تريد تسيل الخروج', onConfirm: () { UserProvider().signOut(context); });
+              showConfirmDialog(
+                context: context,
+                title: 'Log Out',
+                content: 'Are you sure you want to log out?',
+                onConfirm: () {
+                  UserProvider().signOut(context);
+                },
+              );
               // Handle logout
             },
           ),
@@ -111,9 +115,9 @@ class DrawerWidget extends StatelessWidget {
               bgColor: AppColor.primaryColor,
               iconPath: AssetPaths.disableAcountSvg,
             ),
-            title: const Text('تعطيل حساب'),
+            title: const Text('Disable Account'),
             onTap: () {
-              // Handle logout
+              // Handle account disable
             },
           ),
         ],

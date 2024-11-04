@@ -21,12 +21,14 @@ class ConfirmDialog extends StatelessWidget {
       content: Text(content),
       actions: <Widget>[
         TextButton(
+          
           onPressed: onCancel,
-          child: const Text('لا'),
+          child: const Text('No'),
         ),
         ElevatedButton(
+          
           onPressed: onConfirm,
-          child: const Text('نعم'),
+          child: const Text('Yes'),
         ),
       ],
     );

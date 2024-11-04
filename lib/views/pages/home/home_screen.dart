@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'مرحبا بك ${userProvider.currentUser?.fullName ?? 'User'}',
+                      'Hi ${userProvider.currentUser?.fullName ?? 'User'}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

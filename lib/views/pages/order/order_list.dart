@@ -18,16 +18,12 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [],
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(''),
-        ),
+
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
-            Tab(text: 'طلب جديد'),
-            Tab(text: 'تم الإنجاز'),
+            Tab(text: 'New Order'),
+            Tab(text: 'Done'),
           ],
         ),
       ),

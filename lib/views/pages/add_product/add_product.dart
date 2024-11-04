@@ -18,18 +18,19 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  List<File?> selectedImages = []; // تخزين الصور المختارة
+  List<File?> selectedImages = []; // Store selected images
 
-  // TextEditingControllers لإدارة إدخال النصوص
+  // TextEditingControllers to manage text input
   final productNameController = TextEditingController();
   final productDescriptionController = TextEditingController();
   final productPriceController = TextEditingController();
 
-  bool _isLoading = false; // حالة للتحكم في عرض وإخفاء المؤشر
+  bool _isLoading = false; // State to control loading indicator visibility
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: MyBackground(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
@@ -43,12 +44,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextField(
-                      label: 'اسم المنتج',
-                      hintText: 'أدخل اسم المنتج',
+                      label: 'Product Name',
+                      hintText: 'Enter product name',
                       controller: productNameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال اسم المنتج';
+                          return 'Please enter the product name';
                         }
                         return null;
                       },
@@ -57,12 +58,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      label: 'وصف المنتج',
-                      hintText: 'أدخل وصفاً للمنتج',
+                      label: 'Product Description',
+                      hintText: 'Enter a description for the product',
                       controller: productDescriptionController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال وصف المنتج';
+                          return 'Please enter the product description';
                         }
                         return null;
                       },
@@ -71,12 +72,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      label: 'سعر المنتج',
-                      hintText: 'أدخل سعر المنتج',
+                      label: 'Product Price',
+                      hintText: 'Enter product price',
                       controller: productPriceController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال سعر المنتج';
+                          return 'Please enter the product price';
                         }
                         return null;
                       },
@@ -85,16 +86,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     const SizedBox(height: 16),
                     PickImageProduct(
-                      label: 'صور المنتج',
+                      label: 'Product Images',
                       onImagesPicked: (files) {
                         setState(() {
-                          selectedImages = files; // تخزين الصور المختارة
+                          selectedImages = files; // Store selected images
                         });
-                        print('عدد الصور المختارة: ${selectedImages.length}');
+                        print('Number of selected images: ${selectedImages.length}');
                       },
                     ),
                     const SizedBox(height: 16),
-                    if (!_isLoading) // عرض الزر إذا لم يكن هناك تحميل
+                    if (!_isLoading) // Show button if not loading
                        Center(
                         child: ElevatedButton(
                           onPressed: () async {
@@ -105,14 +106,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             if (productName.isEmpty || productDescription.isEmpty || productPrice <= 0 || selectedImages.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('يرجى إكمال جميع الحقول وإضافة صور للمنتج'),
+                                  content: Text('Please fill in all fields and add product images'),
                                 ),
                               );
                               return;
                             }
           
                             setState(() {
-                              _isLoading = true; // إظهار المؤشر
+                              _isLoading = true; // Show loading indicator
                             });
           
                             UserModel? currentUser = await AuthService().getCurrentUserData();
@@ -120,15 +121,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
           
                             // Upload images and get URLs
                             List<String> imageUrls = [];
-                      // Inside the upload function
-for (File? imageFile in selectedImages) {
-  if (imageFile != null) {
-    print('Uploading image: ${imageFile.path}'); // Log the path to check if duplicates exist
-    String imageUrl = await uploadImage(imageFile);
-    imageUrls.add(imageUrl);
-  }
-}
-
+                            // Inside the upload function
+                            for (File? imageFile in selectedImages) {
+                              if (imageFile != null) {
+                                print('Uploading image: ${imageFile.path}'); // Log the path to check if duplicates exist
+                                String imageUrl = await uploadImage(imageFile);
+                                imageUrls.add(imageUrl);
+                              }
+                            }
           
                             // Create the product with the image URLs
                             Product newProduct = Product(
@@ -145,18 +145,18 @@ for (File? imageFile in selectedImages) {
                             await productService.addProduct(newProduct);
           
                             setState(() {
-                              _isLoading = false; // إخفاء المؤشر
+                              _isLoading = false; // Hide loading indicator
                             });
           
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('تم إضافة المنتج بنجاح'),
+                                content: Text('Product added successfully'),
                               ),
                             );
           
-                            Navigator.pop(context); // العودة إلى الشاشة السابقة بعد الإضافة
+                            Navigator.pop(context); // Navigate back after adding product
                           },
-                          child: const Text('إضافة المنتج'),
+                          child: const Text('Add Product'),
                         ),
                       ),
                   ],
@@ -165,7 +165,7 @@ for (File? imageFile in selectedImages) {
               if (_isLoading)
                 const Align(
                   alignment: Alignment.bottomCenter,
-                  child: LinearProgressIndicator(color: Colors.black,), // مؤشر التقدم الأفقي
+                  child: LinearProgressIndicator(color: Colors.black,), // Horizontal progress indicator
                 ),
             ],
           ),

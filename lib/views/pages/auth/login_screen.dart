@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(height: 30),
                       const Text(
-                        'قم بتسجيل دخولك 🤩',
+                        'Log in to your account 🤩',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: emailController,
-                        labelText: 'البريد الالكتروني',
+                        labelText: 'Email',
                         hintText: '',
                         keyboardType: TextInputType.emailAddress,
                         icon: Icons.email,
@@ -63,8 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 20),
                       AuthTextField(
                         controller: passwordController,
-                        labelText: 'كلمة المرور',
-                        hintText: 'كلمة المرور',
+                        labelText: 'Password',
+                        hintText: 'Password',
                         obscureText: true,
                         icon: Icons.lock,
                         validator: (value) {
@@ -87,12 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       authProvider.isLoading
                           ? const CircularProgressIndicator()
                           : AuthButton(
-                              text: 'تسجيل الدخول',
+                              text: 'Log In',
                               onPressed: () async {
                                 await authProvider.signInWithEmailAndPassword(
-                                  email:emailController.text,
-                                  password:passwordController.text,
-                                  context: context
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  context: context,
                                 );
                                 if (authProvider.currentUser != null) {
                                   Navigator.pushReplacement(
@@ -131,14 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          text: 'عند التسجيل فأنت توافق على ',
+                          text: 'By signing up, you agree to the ',
                           style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 14,
                               fontFamily: 'cubefont'),
                           children: [
                             TextSpan(
-                              text: 'الشروط و الاحكام',
+                              text: 'Terms and Conditions',
                               style: const TextStyle(
                                 color: Colors.blue,
                                 decoration: TextDecoration.underline,
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: const Text(
-                          'أو انشئ حساب',
+                          'Or create an account',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.blue,

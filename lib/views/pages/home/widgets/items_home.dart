@@ -30,19 +30,21 @@ class ItemsHome extends StatelessWidget {
                 ItemsRow(
                   items: [
                     Items(
-                      title: 'اضف منتج',
+                      title: 'Add Product',
                       icon: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.grey[850], shape: BoxShape.circle),
-                          child: const Icon(Icons.add, color: Colors.white)),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[850], shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.add, color: Colors.white),
+                      ),
                       backgroundColor: Colors.black,
                       onTap: () => navigateTo(context, AddProductScreen()),
                       value: '',
                     ),
                     Items(
-                      title: 'الاحصاءات',
-                      value: '0 ر.ع',
+                      title: 'Statistics',
+                      value: '0 OMR',
                       percentage: '+1.3%',
                       backgroundColor: Colors.white,
                       progressColor: Colors.green,
@@ -56,16 +58,16 @@ class ItemsHome extends StatelessWidget {
                 ItemsRow(
                   items: [
                     Items(
-                      title: 'ادارة السلع',
+                      title: 'Product Management',
                       value: homeProvider.productCount, // Display the animated or real product count
-                      percentage: '+100%',
+                      percentage: '',
                       backgroundColor: Colors.white,
                       progressColor: Colors.green,
                       progressValue: 1,
                       onTap: () => navigateTo(context, ProductsListScreen()),
                     ),
                     Items(
-                      title: 'طلبات',
+                      title: 'Orders',
                       value: '0',
                       percentage: '0%',
                       backgroundColor: Colors.white,
@@ -80,12 +82,13 @@ class ItemsHome extends StatelessWidget {
                 ItemsRow(
                   items: [
                     Items(
-                      title: 'ادارة المتجر',
+                      title: 'Store Management',
                       percentage: '',
                       icon: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.grey[200], shape: BoxShape.circle),
+                          color: Colors.grey[200], shape: BoxShape.circle,
+                        ),
                         child: const Icon(Icons.settings, color: Colors.black),
                       ),
                       backgroundColor: Colors.white,
@@ -93,12 +96,13 @@ class ItemsHome extends StatelessWidget {
                       value: '',
                     ),
                     Items(
-                      title: 'ادوات الترويج',
+                      title: 'Promotion Tools',
                       value: '',
                       icon: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.grey[200], shape: BoxShape.circle),
+                          color: Colors.grey[200], shape: BoxShape.circle,
+                        ),
                         child: const Icon(Icons.business_sharp, color: Colors.black),
                       ),
                       backgroundColor: Colors.white,
