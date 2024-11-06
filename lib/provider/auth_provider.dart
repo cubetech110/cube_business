@@ -27,7 +27,10 @@ class Auth_Provider with ChangeNotifier {
     } else if (password.isEmpty) {
       _setErrorMessage("Password is required");
       return;
-    } else if (fullName.isEmpty) {
+    } else if (password.length< 6) {
+      _setErrorMessage("Password should be at least 6 characters");
+      return;
+    }else if (fullName.isEmpty) {
       _setErrorMessage("Full name is required");
       return;
     }

@@ -16,29 +16,29 @@ class SocialSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // اختيار النص والأيقونة بناءً على نوع تسجيل الدخول
+    // Set text, icon, and color based on the sign-in type
     String buttonText;
     Widget buttonIcon;
     Color buttonColor;
 
     switch (signInType) {
       case SignInType.Google:
-        buttonText = 'تسجيل بواسطة Google';
+        buttonText = 'Sign in with Google';
         buttonIcon = Image.asset(
           'assets/image/google.png',
           color: Colors.white,
           width: 24.0,
           height: 24.0,
-        ); // استخدام صورة Google
+        ); // Use Google image
         buttonColor = Colors.blue;
         break;
       case SignInType.Apple:
-        buttonText = 'تسجيل بواسطة Apple';
+        buttonText = 'Sign in with Apple';
         buttonIcon = Icon(
           Icons.apple,
           color: Colors.white,
           size: 24.0,
-        ); // استخدام أيقونة Apple
+        ); // Use Apple icon
         buttonColor = Colors.black;
         break;
     }

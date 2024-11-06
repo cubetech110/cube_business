@@ -4,6 +4,8 @@ class UserModel {
   String? id;
   String? fullName;
   String? email;
+    String? phone;
+
   String? role; // 'owner' or 'visitor'
   Timestamp? createdAt;
   Timestamp? subscribe;
@@ -12,6 +14,8 @@ class UserModel {
   UserModel({
     this.id,
     this.fullName,
+        this.phone,
+
     this.email,
     this.role,
     this.subscribe,
@@ -27,7 +31,10 @@ class UserModel {
       role: data['role'] ?? 'visitor', // Default role is 'visitor'
       createdAt: data['createdAt'] != null ? data['createdAt'] as Timestamp : null,
       subscribe: data['subscribe'] != null ? data['subscribe'] as Timestamp : null,
-      storeId: data['storeId'], // storeId can be null
+      storeId: data['storeId'],
+      phone: data['phone']
+      
+       // storeId can be null
     );
   }
 
@@ -39,6 +46,7 @@ class UserModel {
       'createdAt': createdAt,
       'subscribe': subscribe,
       'storeId': storeId,
+      "phone":phone
     };
   }
 }

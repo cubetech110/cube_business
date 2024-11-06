@@ -1,6 +1,7 @@
 import 'package:cube_business/provider/user_provider.dart';
 import 'package:cube_business/provider/store_provider.dart';
 import 'package:cube_business/services/upload_image_service.dart';
+import 'package:cube_business/views/widgets/custom_textfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // Import Image Picker
 import 'package:provider/provider.dart'; // Import Provider
@@ -18,6 +19,7 @@ class _EditProfileState extends State<EditProfile> {
   File? _selectedImage; // Store the selected image
   TextEditingController _emailController = TextEditingController();
   bool _isLoading = false; // Add loading state
+  TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
               )
               : IconButton(
-                  icon: const Icon(Icons.save),
+                  icon: const Icon(Icons.check),
                   onPressed: () {
                     // Save the updated email and profile image (if any)
                     _saveProfile(context);
@@ -57,6 +59,7 @@ class _EditProfileState extends State<EditProfile> {
 
           // Initialize email controller with current user email
           _emailController.text = userProvider.currentUser!.email ?? '';
+          _phoneController.text = userProvider.currentUser!.phone ?? '';
 
           // When data is available, show the profile screen
           return Padding(
@@ -91,6 +94,27 @@ class _EditProfileState extends State<EditProfile> {
                                   fontSize: 22, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 8),
+
+
+
+
+
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: SizedBox(
+    
+    width: 240,
+    child: CustomTextField(label: 'Email', hintText: '', controller: _emailController)),
+),
+
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: SizedBox(
+    
+    width: 240,
+    child: CustomTextField(label: 'Phone', hintText: '', controller:_phoneController)),
+),
+
                             // SizedBox(
                             //   width: 250, // Set width for TextField
                             //   child: TextField(
@@ -182,8 +206,13 @@ Future<void> _saveProfile(BuildContext context) async {
   try {
     // Update email
     final newEmail = _emailController.text.trim();
+        final newPhone = _phoneController.text.trim();
+
     if (newEmail.isNotEmpty && newEmail != userProvider.currentUser!.email) {
       await userProvider.updateEmail(newEmail); // Implement this method in UserProvider
+    }
+   if (newPhone.isNotEmpty && newPhone != userProvider.currentUser!.phone) {
+      await userProvider.updatePhone(newPhone); // Implement this method in UserProvider
     }
 
     // Update profile image (store logo)

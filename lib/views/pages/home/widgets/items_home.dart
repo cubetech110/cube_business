@@ -1,6 +1,7 @@
 import 'package:cube_business/core/helper/nav_helper.dart';
 import 'package:cube_business/provider/home_provider.dart';
 import 'package:cube_business/views/pages/home/widgets/item.dart';
+import 'package:cube_business/views/pages/promtion/promotion.page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cube_business/services/auth_service.dart';
@@ -107,7 +108,7 @@ class ItemsHome extends StatelessWidget {
                       ),
                       backgroundColor: Colors.white,
                       progressValue: 0.0,
-                      onTap: () => navigateTo(context, ProductsListScreen()),
+                      onTap: () => navigateTo(context, PromotionPage()),
                     ),
                   ],
                 ),

@@ -13,7 +13,7 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+String _errorMsg="";
   @override
   Widget build(BuildContext context) {
     final auth_Provider = Provider.of<Auth_Provider>(context);
@@ -74,7 +74,7 @@ class SignupScreen extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
-                          }
+                          }else if (value.length<6){return 'Password should be at least 6 characters';}
                           return null;
                         },
                         hintText: '',
@@ -83,14 +83,15 @@ class SignupScreen extends StatelessWidget {
                       auth_Provider.isLoading
                           ? CircularProgressIndicator()
                           : AuthButton(
-                              text: 'Creat',
+                              text: 'Creat New Account',
                               onPressed: () {
-                                auth_Provider.registerWithEmailAndPassword(
+                          auth_Provider.registerWithEmailAndPassword(
                                   email: emailController.text,
                                   password: passwordController.text,
                                   fullName: fullNameController.text,
                                   context: context,
                                 );
+                                // _errorMsg=respone;
                               },
                             ),
                       const SizedBox(height: 10),

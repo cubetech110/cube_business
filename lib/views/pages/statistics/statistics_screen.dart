@@ -9,13 +9,14 @@ class StatisticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Statistics'),),
       body: ListView(
         children: [
           ProductSalesChart(),
           ItemsRow(
             items: [
               Items(
-                title: 'زيارات',
+                title: 'Vist',
                 value: '20',
                 percentage: '+0.5',
                 progressValue: 0.12,
@@ -27,7 +28,7 @@ class StatisticsScreen extends StatelessWidget {
                 },
               ),
               Items(
-                title: 'التقييمات',
+                title: 'Rate',
                 value: '4.5',
                 percentage: '+0.5',
                 backgroundColor: Colors.white,

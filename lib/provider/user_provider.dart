@@ -26,7 +26,14 @@ class UserProvider with ChangeNotifier {
 
     notifyListeners();
   }
+  Future<void> updatePhone(String newPhone) async {
+    _isLoading = true;
 
+    _currentUser!.phone = newPhone;
+    _isLoading = false;
+
+    notifyListeners();
+  }
   Future<void> signOut(BuildContext context) async {
     await AuthService().signOut();
     _currentUser = null;

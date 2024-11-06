@@ -59,7 +59,7 @@ class _PickImageStoreState extends State<PickImageStore> {
         ),
         const SizedBox(height: 10),
         const Text(
-          'click to change image',
+          'click to pick logo',
           style: TextStyle(fontSize: 16, color: Colors.grey),
         ),
       ],

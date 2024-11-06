@@ -8,6 +8,7 @@ import 'package:cube_business/views/widgets/my_background.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_business/views/pages/add_product/widget/pick_image_product.dart';
 import 'package:cube_business/views/widgets/custom_textfiled.dart';
+import 'package:flutter/services.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -72,6 +73,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
+
                       label: 'Product Price',
                       hintText: 'Enter product price',
                       controller: productPriceController,
@@ -82,7 +85,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         return null;
                       },
                       maxLines: 1,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true,signed: true),
                     ),
                     const SizedBox(height: 16),
                     PickImageProduct(
@@ -103,7 +106,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             final productDescription = productDescriptionController.text;
                             final productPrice = double.tryParse(productPriceController.text) ?? 0.0;
           
-                            if (productName.isEmpty || productDescription.isEmpty || productPrice <= 0 || selectedImages.isEmpty) {
+                            if (productName.isEmpty || productDescription.isEmpty  || selectedImages.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Please fill in all fields and add product images'),
