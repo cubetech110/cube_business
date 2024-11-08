@@ -49,6 +49,8 @@ dependencies:
   path_provider: ^2.1.4
   flutter_svg: ^2.0.10+1
   syncfusion_flutter_charts: ^27.1.50
+  google_generative_ai: ^0.4.6
+  glowy_borders: ^1.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

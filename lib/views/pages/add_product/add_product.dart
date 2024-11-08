@@ -4,6 +4,7 @@ import 'package:cube_business/model/user_model.dart';
 import 'package:cube_business/services/auth_service.dart';
 import 'package:cube_business/services/product_screvice.dart';
 import 'package:cube_business/services/upload_image_service.dart';
+import 'package:cube_business/views/pages/add_product/widget/ai_text_genrator.dart';
 import 'package:cube_business/views/widgets/my_background.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_business/views/pages/add_product/widget/pick_image_product.dart';
@@ -58,20 +59,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       keyboardType: TextInputType.text,
                     ),
                     const SizedBox(height: 16),
-                    CustomTextField(
-                      label: 'Product Description',
-                      hintText: 'Enter a description for the product',
-                      controller: productDescriptionController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the product description';
-                        }
-                        return null;
-                      },
-                      maxLines: 3,
-                      keyboardType: TextInputType.multiline,
-                    ),
-                    const SizedBox(height: 16),
+productDescriptionAI(),                    const SizedBox(height: 16),
                     CustomTextField(
                   inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
 

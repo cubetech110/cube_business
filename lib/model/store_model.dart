@@ -5,9 +5,11 @@ class Store {
   String name;
   String ownerId;
   String location;
+  String? premotionUrl;
   DateTime createdAt;
   int visitorCount;
   String categories;
+  
 String? logoUrl;
   Store({
      this.id,
@@ -16,7 +18,7 @@ String? logoUrl;
     required this.location,
     required this.createdAt,
     required this.visitorCount,
-    required this.categories, this.logoUrl,
+    required this.categories, this.logoUrl,this.premotionUrl,
   });
 
   // تحويل المستند من Firestore إلى Store
@@ -30,6 +32,8 @@ String? logoUrl;
       visitorCount: data['visitorCount'],
       categories: data['categories'],
       logoUrl: data['logoUrl'],
+      premotionUrl: data['premotionUrl'],
+
     );
   }
 
@@ -43,6 +47,7 @@ String? logoUrl;
       'visitorCount': visitorCount,
       'categories': categories,
       'logoUrl': logoUrl,
+      'premotionUrl':premotionUrl
     };
   }
 }

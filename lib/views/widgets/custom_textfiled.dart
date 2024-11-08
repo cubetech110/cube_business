@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:glowy_borders/glowy_borders.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -9,16 +9,21 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final int maxLines;
   final TextInputType keyboardType;
-final List<TextInputFormatter>? inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool isLoading; // Control loading state
+  final Widget? suffixIcon;
+
   const CustomTextField({
     super.key,
     required this.label,
     required this.hintText,
     required this.controller,
     this.inputFormatters,
-     this.validator,
+    this.validator,
     this.maxLines = 1,
+    this.suffixIcon,
     this.keyboardType = TextInputType.text,
+    this.isLoading = false, // Default to false
   });
 
   @override
@@ -32,6 +37,7 @@ final List<TextInputFormatter>? inputFormatters;
         ),
         const SizedBox(height: 8),
         TextFormField(
+          enabled: !isLoading,
           inputFormatters: inputFormatters,
           controller: controller,
           validator: validator,
@@ -40,31 +46,37 @@ final List<TextInputFormatter>? inputFormatters;
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.transparent,
-            isDense: true, // Reduces the height of the TextField
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 10.0, horizontal: 15.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(
                 width: 2.0,
-                color: Colors.grey, // لون الحدود الافتراضي
+                color: Colors.grey,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(
                 width: 2.0,
-                color: Colors.grey, // لون الحدود في الوضع الافتراضي
+                color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(
-                color: Colors.black, // لون الحدود عند التركيز
+                color: Colors.black,
                 width: 2.0,
               ),
             ),
             hintText: hintText,
+          suffixIcon: suffixIcon != null
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0), // Aligns icon to bottom-right
+                  child: suffixIcon,
+                )
+              : null,
           ),
         ),
       ],
