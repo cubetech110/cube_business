@@ -1,4 +1,8 @@
+import 'package:cube_business/model/order_model.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderListScreen extends StatefulWidget {
   @override
@@ -11,14 +15,21 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this); // 2 tabs: New Order, Completed
+    _tabController = TabController(length: 2, vsync: this); // 2 tabs: New Order, Done
+  }
+
+  Stream<List<OrderModel>> getOrders(String status) {
+    return FirebaseFirestore.instance
+        .collection('orders')
+        .where('status', isEqualTo: status)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => OrderModel.fromFirestore(doc)).toList());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
@@ -30,37 +41,42 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
       body: TabBarView(
         controller: _tabController,
         children: [
-          OrderListWidget(
-            orders: [
-              Order(
-                userName: 'محمد سعيد البوصافي',
-                userPhone: '90979774',
-                productDetails: 'حاسوب محمول - 16GB RAM - 512GB SSD',
-              ),
-              Order(
-                userName: 'سالم الكندي',
-                userPhone: '98765432',
-                productDetails: 'هاتف ذكي - iPhone 12 Pro',
-              ),
-            ],
-            leadingIcon: Icons.shopping_bag,
-            leadingIconColor: Colors.black,
-            trailingIcon: Icons.done,
-            trailingIconColor: const Color.fromARGB(255, 42, 146, 46),
-            trailingBackgroundColor: Colors.green.withOpacity(0.2),
+          StreamBuilder<List<OrderModel>>(
+            stream: getOrders('new'), // Fetch new orders
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No New Orders'));
+              }
+              return OrderListWidget(
+                orders: snapshot.data!,
+                leadingIcon: Icons.shopping_bag,
+                leadingIconColor: Colors.black,
+                trailingIcon: Icons.done,
+                trailingIconColor: const Color.fromARGB(255, 42, 146, 46),
+                trailingBackgroundColor: Colors.green.withOpacity(0.2),
+              );
+            },
           ),
-          OrderListWidget(
-            orders: [
-              Order(
-                userName: 'علي الحارثي',
-                userPhone: '99887766',
-                productDetails: 'طابعة ليزر - HP LaserJet Pro',
-              ),
-            ],
-            leadingIcon: Icons.check_circle,
-            leadingIconColor: Colors.green,
-            trailingIcon: Icons.arrow_forward_ios,
-            trailingIconColor: Colors.grey,
+          StreamBuilder<List<OrderModel>>(
+            stream: getOrders('done'), // Fetch completed orders
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No Completed Orders'));
+              }
+              return OrderListWidget(
+                orders: snapshot.data!,
+                leadingIcon: Icons.check_circle,
+                leadingIconColor: Colors.green,
+                trailingIcon: Icons.arrow_forward_ios,
+                trailingIconColor: Colors.grey,
+              );
+            },
           ),
         ],
       ),
@@ -68,9 +84,9 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
   }
 }
 
-// Reusable OrderListWidget
+
 class OrderListWidget extends StatelessWidget {
-  final List<Order> orders;
+  final List<OrderModel> orders;
   final IconData leadingIcon;
   final Color leadingIconColor;
   final IconData trailingIcon;
@@ -113,8 +129,9 @@ class OrderListWidget extends StatelessWidget {
                       child: Icon(trailingIcon, color: trailingIconColor),
                     )
                   : Icon(trailingIcon, color: trailingIconColor),
-              onTap: () {
-                // Handle order tap
+              onTap: () async {
+                // Change status to "done" on tap
+                await order.updateStatus("done");
               },
             ),
           ),
@@ -122,17 +139,4 @@ class OrderListWidget extends StatelessWidget {
       },
     );
   }
-}
-
-// Order Model
-class Order {
-  final String userName;
-  final String userPhone;
-  final String productDetails;
-
-  Order({
-    required this.userName,
-    required this.userPhone,
-    required this.productDetails,
-  });
 }

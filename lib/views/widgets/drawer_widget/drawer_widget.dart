@@ -1,6 +1,10 @@
 import 'package:cube_business/core/asset_paths.dart';
 import 'package:cube_business/core/color_constant.dart';
+import 'package:cube_business/core/helper/nav_helper.dart';
 import 'package:cube_business/provider/user_provider.dart';
+import 'package:cube_business/views/pages/aboutUs/aboutUS.dart';
+import 'package:cube_business/views/pages/contactUs/contactUs_screen.dart';
+import 'package:cube_business/views/pages/notification/notification_screen.dart';
 import 'package:cube_business/views/widgets/confirm_dilog.dart';
 import 'package:cube_business/views/widgets/drawer_widget/customDrawerHeader.dart';
 import 'package:cube_business/views/widgets/icon_widget.dart';
@@ -56,7 +60,7 @@ class DrawerWidget extends StatelessWidget {
               ],
             ),
             title: const Text('Notifications'),
-            onTap: () {},
+            onTap: () {navigateTo(context, NotificationScreen());},
           ),
           ListTile(
             leading: IconWidget(
@@ -65,7 +69,9 @@ class DrawerWidget extends StatelessWidget {
               iconPath: AssetPaths.infoSvg,
             ),
             title: const Text('About Us'),
-            onTap: () {},
+            onTap: () {
+              navigateTo(context, AboutUs());
+            },
           ),
           ListTile(
             leading: IconWidget(
@@ -75,7 +81,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Support Team'),
             onTap: () {
-              // Handle support
+              navigateTo(context, ContactUsPage());
             },
           ),
           ListTile(
@@ -87,7 +93,6 @@ class DrawerWidget extends StatelessWidget {
             title: const Text('Policies and Terms'),
             onTap: () {
               Navigator.pop(context);
-              // Navigate to Account
             },
           ),
           ListTile(
@@ -117,8 +122,14 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Disable Account'),
             onTap: () {
-              // Handle account disable
-            },
+           showConfirmDialog(
+                context: context,
+                title: 'Disable Account',
+                content: 'Are you sure you want to Disable Account?',
+                onConfirm: () {
+                  UserProvider().signOut(context);
+                },
+              );            },
           ),
         ],
       ),

@@ -67,18 +67,14 @@ class Items extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    percentage!,
-                    style: TextStyle(
-                      color: progressColor,
-                      fontSize: 16,
-                    ),
-                  ),
-                  CircularProgressIndicator(
-                    value: progressValue,
-                    color: progressColor,
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                  ),
+                  // Text(
+                  //   percentage!,
+                  //   style: TextStyle(
+                  //     color: progressColor,
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
+
                 ],
               ),
           ],
