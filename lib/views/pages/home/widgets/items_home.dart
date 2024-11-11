@@ -83,7 +83,7 @@ class ItemsHome extends StatelessWidget {
                 ItemsRow(
                   items: [
                     Items(
-                      title: 'Store Management',
+                      title: 'Account Management',
                       percentage: '',
                       icon: Container(
                         padding: const EdgeInsets.all(10),

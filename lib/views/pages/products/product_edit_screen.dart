@@ -49,7 +49,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('يرجى إكمال جميع الحقول وإضافة صور للمنتج')),
+            content: Text('Please complete all fields and add images of the product')),
       );
       return;
     }
@@ -85,7 +85,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تم تحديث المنتج بنجاح')),
+        const SnackBar(content: Text('Product updated successfully')),
       );
 
       Navigator.pop(context);
@@ -117,24 +117,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       _buildImagePageView(widget.product),
                       const SizedBox(height: 16),
                       CustomTextField(
-                        label: 'اسم المنتج',
-                        hintText: 'أدخل اسم المنتج',
+                        label: 'Product Name',
+                        hintText: 'Enter product name',
                         controller: productNameController,
                         maxLines: 1,
                         keyboardType: TextInputType.text,
                       ),
                       const SizedBox(height: 16),
                       CustomTextField(
-                        label: 'وصف المنتج',
-                        hintText: 'أدخل وصفاً للمنتج',
+                        label: 'Product Description',
+                        hintText: 'Enter product description',
                         controller: productDescriptionController,
                         maxLines: 3,
                         keyboardType: TextInputType.multiline,
                       ),
                       const SizedBox(height: 16),
                       CustomTextField(
-                        label: 'سعر المنتج',
-                        hintText: 'أدخل سعر المنتج',
+                        label: 'Product Price',
+                        hintText: 'Enter product price',
                         controller: productPriceController,
                         maxLines: 1,
                         keyboardType: TextInputType.number,
@@ -144,7 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Center(
                           child: ElevatedButton(
                             onPressed: _saveChanges,
-                            child: const Text('تحديث المنتج'),
+                            child: const Text('Update Product'),
                           ),
                         ),
                     ],
