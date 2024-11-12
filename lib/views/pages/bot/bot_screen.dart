@@ -47,7 +47,7 @@ class BotScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                           Text(
-                                    message.isUser?'you:':'Brzah:',
+                                    message.isUser?'you:':'Cube Store:',
                                     style: TextStyle(
                                       color: message.isUser
                                           ? Colors.white.withOpacity(0.7)
