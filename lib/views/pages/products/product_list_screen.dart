@@ -1,6 +1,7 @@
 import 'package:cube_business/core/color_constant.dart';
 import 'package:cube_business/core/helper/nav_helper.dart';
 import 'package:cube_business/model/user_model.dart';
+import 'package:cube_business/provider/home_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
 import 'package:cube_business/services/product_screvice.dart';
 import 'package:cube_business/views/pages/add_product/add_product.dart';
@@ -8,7 +9,7 @@ import 'package:cube_business/views/pages/home/widgets/no_product.dart';
 import 'package:cube_business/views/pages/products/product_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_business/model/product_model.dart';
-
+import 'package:provider/provider.dart';
 class ProductsListScreen extends StatefulWidget {
   const ProductsListScreen({super.key});
 
@@ -33,7 +34,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       if (currentUser == null || currentUser.storeId == null) {
         setState(() {
           _errorMessage =
-              'تعذر الحصول على بيانات المتجر. يرجى التحقق من تسجيل الدخول.';
+              'ERROR.';
         });
       } else {
         setState(() {
@@ -43,13 +44,15 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'حدث خطأ أثناء جلب بيانات المنتجات: $e';
+        _errorMessage = 'NO PRODUCT FOUND: $e';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final homeProvider= Provider.of<HomeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
       ),
@@ -69,7 +72,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
-                      return Center(child: Text('حدث خطأ: ${snapshot.error}'));
+                      return Center(child: Text('ERROR: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return const Center(child: NoProduct());
                     } else {
@@ -102,6 +105,8 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final homeProvider= Provider.of<HomeProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
@@ -132,10 +137,12 @@ class ProductWidget extends StatelessWidget {
                     .deleteProduct(product.id!);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('تم حذف المنتج بنجاح'),
+                    content: Text('DELETED!'),
                   ),
                 );
               }
+
+              homeProvider.fetchProductCount();
             },
             icon: Icon(
               Icons.delete,
@@ -152,30 +159,28 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
-  Future<bool> _confirmDeleteDialog(BuildContext context) async {
-    return await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('تأكيد الحذف'),
-              content: const Text('هل أنت متأكد أنك تريد حذف هذا المنتج؟'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  child: const Text('إلغاء'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: const Text('حذف'),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-  }
-}
+Future<bool> _confirmDeleteDialog(BuildContext context) async {
+  return await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Confirm Deletion'),
+        content: const Text('Are you sure you want to delete this product?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('Delete'),
+          ),
+        ],
+      );
+    },
+  ) ?? false;
+}}

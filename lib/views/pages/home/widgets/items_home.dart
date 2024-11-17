@@ -19,104 +19,101 @@ class ItemsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
-      child: Consumer<HomeProvider>(
-        builder: (context, homeProvider, child) {
-          return Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Column(
-              children: [
-                // Row 1: Add Product and Monthly Sales
-                ItemsRow(
-                  items: [
-                    Items(
-                      title: 'Add Product',
-                      icon: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[850], shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.add, color: Colors.white),
+    return Consumer<HomeProvider>(
+      builder: (context, homeProvider, child) {
+        return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Column(
+            children: [
+              // Row 1: Add Product and Monthly Sales
+              ItemsRow(
+                items: [
+                  Items(
+                    title: 'Add Product',
+                    icon: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[850], shape: BoxShape.circle,
                       ),
-                      backgroundColor: Colors.black,
-                      onTap: () => navigateTo(context, AddProductScreen()),
-                      value: '',
+                      child: const Icon(Icons.add, color: Colors.white),
                     ),
-                    Items(
-                      title: 'Statistics',
-                      value: '0 OMR',
-                      percentage: '+1.3%',
-                      backgroundColor: Colors.white,
-                      progressColor: Colors.green,
-                      progressValue: 0.12,
-                      onTap: () => navigateTo(context, StatisticsScreen()),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // Row 2: Product Management and Orders
-                ItemsRow(
-                  items: [
-                    Items(
-                      title: 'Product Management',
-                      value: homeProvider.productCount, // Display the animated or real product count
-                      percentage: '',
-                      backgroundColor: Colors.white,
-                      progressColor: Colors.green,
-                      progressValue: 1,
-                      onTap: () => navigateTo(context, ProductsListScreen()),
-                    ),
-                    Items(
-                      title: 'Orders',
-                      value: '0',
-                      percentage: '0%',
-                      backgroundColor: Colors.white,
-                      progressColor: Colors.white,
-                      progressValue: 0.0,
-                      onTap: () => navigateTo(context, OrderListScreen()),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // Row 3: Store Management and Promotion Tools
-                ItemsRow(
-                  items: [
-                    Items(
-                      title: 'Account Management',
-                      percentage: '',
-                      icon: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200], shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.settings, color: Colors.black),
+                    backgroundColor: Colors.black,
+                    onTap: () => navigateTo(context, AddProductScreen()),
+                    value: '',
+                  ),
+                  Items(
+                    title: 'Statistics',
+                    value: '0 OMR',
+                    percentage: '+1.3%',
+                    backgroundColor: Colors.white,
+                    progressColor: Colors.green,
+                    progressValue: 0.12,
+                    onTap: () => navigateTo(context, StatisticsScreen()),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              // Row 2: Product Management and Orders
+              ItemsRow(
+                items: [
+                  Items(
+                    title: 'Product Management',
+                    value: homeProvider.productCount, // Display the animated or real product count
+                    percentage: '',
+                    backgroundColor: Colors.white,
+                    progressColor: Colors.green,
+                    progressValue: 1,
+                    onTap: () => navigateTo(context, ProductsListScreen()),
+                  ),
+                  Items(
+                    title: 'Orders',
+                    value: '0',
+                    percentage: '0%',
+                    backgroundColor: Colors.white,
+                    progressColor: Colors.white,
+                    progressValue: 0.0,
+                    onTap: () => navigateTo(context, OrderListScreen()),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              // Row 3: Store Management and Promotion Tools
+              ItemsRow(
+                items: [
+                  Items(
+                    title: 'Account Management',
+                    percentage: '',
+                    icon: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200], shape: BoxShape.circle,
                       ),
-                      backgroundColor: Colors.white,
-                      onTap: () => navigateTo(context, EditProfile()),
-                      value: '',
+                      child: const Icon(Icons.settings, color: Colors.black),
                     ),
-                    Items(
-                      title: 'Promotion Tools',
-                      value: '',
-                      icon: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200], shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.business_sharp, color: Colors.black),
+                    backgroundColor: Colors.white,
+                    onTap: () => navigateTo(context, EditProfile()),
+                    value: '',
+                  ),
+                  Items(
+                    title: 'Promotion Tools',
+                    value: '',
+                    icon: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200], shape: BoxShape.circle,
                       ),
-                      backgroundColor: Colors.white,
-                      progressValue: 0.0,
-                      onTap: () => navigateTo(context, PromotionPage()),
+                      child: const Icon(Icons.business_sharp, color: Colors.black),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                    backgroundColor: Colors.white,
+                    progressValue: 0.0,
+                    onTap: () => navigateTo(context, PromotionPage()),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

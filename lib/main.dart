@@ -1,5 +1,6 @@
 import 'package:cube_business/core/app_theme.dart';
 import 'package:cube_business/provider/auth_provider.dart';
+import 'package:cube_business/provider/home_provider.dart';
 import 'package:cube_business/provider/user_provider.dart';
 import 'package:cube_business/provider/store_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
@@ -30,6 +31,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
         ),
+
+
+
+
+  ChangeNotifierProvider(
+          create: (_) => HomeProvider(),
+        ),
+
         StreamProvider<User?>.value(
           value: AuthService().authStateChanges,
           initialData: null,

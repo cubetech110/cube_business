@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cube_business/model/product_model.dart';
 import 'package:cube_business/model/user_model.dart';
+import 'package:cube_business/provider/home_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
 import 'package:cube_business/services/product_screvice.dart';
 import 'package:cube_business/services/upload_image_service.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:cube_business/views/pages/add_product/widget/pick_image_product.dart';
 import 'package:cube_business/views/widgets/custom_textfiled.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -31,6 +33,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+final homeProvider= Provider.of<HomeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(),
       body: MyBackground(
@@ -90,18 +96,31 @@ productDescriptionAI(),                    const SizedBox(height: 16),
                        Center(
                         child: ElevatedButton(
                           onPressed: () async {
-                            final productName = productNameController.text;
-                            final productDescription = productDescriptionController.text;
-                            final productPrice = double.tryParse(productPriceController.text) ?? 0.0;
-          
-                            if (productName.isEmpty || productDescription.isEmpty  || selectedImages.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Please fill in all fields and add product images'),
-                                ),
-                              );
-                              return;
-                            }
+                    final productName = productNameController.text;
+final productDescription = productDescriptionController.text;
+final productPrice = double.tryParse(productPriceController.text) ?? 0.0;
+
+String? errorMessage;
+
+if (productName.isEmpty) {
+  errorMessage = 'Product name is required.';
+} else if (selectedImages.isEmpty) {
+  errorMessage = 'Please add product images.';
+} else if (productPrice <= 0.0) {
+  errorMessage = 'Please provide a valid product price.';
+}
+
+if (errorMessage != null) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(errorMessage),
+    ),
+  );
+  return;
+}
+
+// Proceed with submitting the data or whatever logic comes next
+
           
                             setState(() {
                               _isLoading = true; // Show loading indicator
@@ -134,7 +153,7 @@ productDescriptionAI(),                    const SizedBox(height: 16),
                             );
           
                             await productService.addProduct(newProduct);
-          
+        await  homeProvider.fetchProductCount();
                             setState(() {
                               _isLoading = false; // Hide loading indicator
                             });
