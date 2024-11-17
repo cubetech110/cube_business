@@ -9,6 +9,8 @@ import 'package:cube_business/views/widgets/confirm_dilog.dart';
 import 'package:cube_business/views/widgets/drawer_widget/customDrawerHeader.dart';
 import 'package:cube_business/views/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:cube_business/views/pages/policiesAndTearm/Policies_and_Terms.dart';
+
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -92,7 +94,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Policies and Terms'),
             onTap: () {
-              Navigator.pop(context);
+              navigateTo(context,PoliciesAndTermsPage());
             },
           ),
           ListTile(
