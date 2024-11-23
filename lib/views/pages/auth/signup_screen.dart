@@ -13,10 +13,12 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-String _errorMsg="";
+final String _errorMsg="";
+
+  SignupScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final auth_Provider = Provider.of<Auth_Provider>(context);
+    final authProvider = Provider.of<Auth_Provider>(context);
 
     return Scaffold(
       body: MyBackground(
@@ -80,12 +82,12 @@ String _errorMsg="";
                         hintText: '',
                       ),
                       const SizedBox(height: 20),
-                      auth_Provider.isLoading
-                          ? CircularProgressIndicator()
+                      authProvider.isLoading
+                          ? const CircularProgressIndicator()
                           : AuthButton(
                               text: 'Creat New Account',
                               onPressed: () {
-                          auth_Provider.registerWithEmailAndPassword(
+                          authProvider.registerWithEmailAndPassword(
                                   email: emailController.text,
                                   password: passwordController.text,
                                   fullName: fullNameController.text,
@@ -98,21 +100,21 @@ String _errorMsg="";
                       SocialSignInButton(
                         signInType: SignInType.Google,
                         onPressed: () {
-                          auth_Provider.signInWithGoogle(context);
+                          authProvider.signInWithGoogle(context);
                         },
                       ),
                       const SizedBox(height: 10),
                       SocialSignInButton(
                         signInType: SignInType.Apple,
                         onPressed: () {
-                          auth_Provider.signInWithApple(context);
+                          authProvider.signInWithApple(context);
                         },
                       ),
                       const SizedBox(height: 20),
-                      if (auth_Provider.errorMessage != null)
+                      if (authProvider.errorMessage != null)
                         Text(
-                          auth_Provider.errorMessage!,
-                          style: TextStyle(color: Colors.red),
+                          authProvider.errorMessage!,
+                          style: const TextStyle(color: Colors.red),
                         ),
                       RichText(
                         textAlign: TextAlign.center,

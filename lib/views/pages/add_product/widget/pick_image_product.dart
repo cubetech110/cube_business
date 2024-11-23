@@ -17,8 +17,8 @@ class _PickImageProductState extends State<PickImageProduct> {
   List<XFile?> _images = [];
 
   Future<void> _pickImages() async {
-    final ImagePicker _picker = ImagePicker();
-    final List<XFile?>? pickedImages = await _picker.pickMultiImage();
+    final ImagePicker picker = ImagePicker();
+    final List<XFile?> pickedImages = await picker.pickMultiImage();
     if (pickedImages != null) {
       setState(() {
         _images = pickedImages;

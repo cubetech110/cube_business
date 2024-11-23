@@ -1,6 +1,3 @@
-import 'package:cube_business/core/helper/nav_helper.dart';
-import 'package:cube_business/views/pages/add_product/add_product.dart';
-import 'package:cube_business/views/widgets/custom_b.dart';
 import 'package:flutter/material.dart';
 
 class NoProduct extends StatelessWidget {

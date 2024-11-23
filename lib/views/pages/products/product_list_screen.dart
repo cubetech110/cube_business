@@ -144,7 +144,7 @@ class ProductWidget extends StatelessWidget {
 
               homeProvider.fetchProductCount();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
             ),
           ),

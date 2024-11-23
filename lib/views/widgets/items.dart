@@ -1,6 +1,6 @@
 import 'package:cube_business/views/pages/home/widgets/item.dart';
 import 'package:flutter/material.dart';
-import 'items.dart'; // Import your reusable Items widget
+// Import your reusable Items widget
 
 class ItemsRow extends StatelessWidget {
   final List<Items> items; // Accept a list of Items widgets

@@ -28,7 +28,7 @@ class UserService {
       });
     } catch (e) {
       print('Error updating storeId: $e');
-      throw e;
+      rethrow;
     }
   }
   // حذف مستخدم

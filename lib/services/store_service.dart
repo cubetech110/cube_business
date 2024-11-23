@@ -35,7 +35,7 @@ Future<void> addStore(Store store) async {
       await storeCollection.doc(storeId).update(newData);
     } catch (e) {
       print("Error updating store: $e");
-      throw e;
+      rethrow;
     }
   }
 }

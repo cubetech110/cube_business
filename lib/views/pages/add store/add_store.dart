@@ -188,7 +188,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
         await StoreService().addStore(store);
 
         // Navigate to HomeScreen after successful store creation
-        navigateAndRemove(context, HomeScreen());
+        navigateAndRemove(context, const HomeScreen());
       } catch (e) {
         showErrorSnackBar(e.toString(), context);
       } finally {

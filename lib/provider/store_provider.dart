@@ -42,18 +42,11 @@ class StoreProvider with ChangeNotifier {
   }
 
 Future<void> updateStore(Map<String, dynamic> newData,String storeId) async {
-  if (storeId == null) {
-    _errorMessage = "No store loaded! Load a store first.";
-    notifyListeners();
-    print("No store loaded to update.");
-    return;
-  }
-
   _isLoading = true;
   notifyListeners();
   
   try {
-    print("Updating store with ID: ${storeId}");
+    print("Updating store with ID: $storeId");
 
     // Pass the new data to the StoreService
     await StoreService().updateStore(storeId.toString(), newData);

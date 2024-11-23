@@ -12,8 +12,7 @@ import 'package:cube_business/views/widgets/custom_textfiled.dart';
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
 
-  const ProductDetailsScreen({Key? key, required this.product})
-      : super(key: key);
+  const ProductDetailsScreen({super.key, required this.product});
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -106,7 +105,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: [
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Stack(
               children: [
                 Padding(

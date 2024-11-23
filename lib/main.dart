@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Cube Business',
         theme: AppTheme.lightTheme,
-        home: AuthWrapper(),
+        home: const AuthWrapper(),
         // locale: const Locale('ar'),
         // localizationsDelegates: const [
         //   GlobalMaterialLocalizations.delegate,

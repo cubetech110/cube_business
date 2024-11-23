@@ -65,7 +65,7 @@ final homeProvider= Provider.of<HomeProvider>(context);
                       keyboardType: TextInputType.text,
                     ),
                     const SizedBox(height: 16),
-productDescriptionAI(),                    const SizedBox(height: 16),
+const productDescriptionAI(),                    const SizedBox(height: 16),
                     CustomTextField(
                   inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
 
@@ -79,7 +79,7 @@ productDescriptionAI(),                    const SizedBox(height: 16),
                         return null;
                       },
                       maxLines: 1,
-                      keyboardType: TextInputType.numberWithOptions(decimal: true,signed: true),
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true),
                     ),
                     const SizedBox(height: 16),
                     PickImageProduct(

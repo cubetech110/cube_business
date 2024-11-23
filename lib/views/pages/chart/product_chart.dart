@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ProductSalesChart extends StatelessWidget {
+  const ProductSalesChart({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Example product sales data
@@ -23,9 +25,9 @@ class ProductSalesChart extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(16.0),
           child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            title: ChartTitle(text: 'Monthly Sales of Products'),
-            legend: Legend(isVisible: true),
+            primaryXAxis: const CategoryAxis(),
+            title: const ChartTitle(text: 'Monthly Sales of Products'),
+            legend: const Legend(isVisible: true),
             tooltipBehavior: TooltipBehavior(enable: true),
             series: <CartesianSeries>[
               BarSeries<SalesData, String>(

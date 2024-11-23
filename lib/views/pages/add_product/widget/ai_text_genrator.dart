@@ -71,7 +71,7 @@ class _productDescriptionAIState extends State<productDescriptionAI> {
     child:SizedBox(
       width: 50,
       height: 50,
-      child:_sendingMessage? SizedBox.shrink(): Icon(Icons.generating_tokens_rounded, size: 30,))), // Add your desired icon here
+      child:_sendingMessage? const SizedBox.shrink(): const Icon(Icons.generating_tokens_rounded, size: 30,))), // Add your desired icon here
 );
 
   }

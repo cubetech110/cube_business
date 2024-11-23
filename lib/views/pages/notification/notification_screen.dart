@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
@@ -25,10 +27,10 @@ class _NotificationScreenState extends State<NotificationScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        title: const Text('Notifications'),
 
       ),
-      body: GeneralTab()
+      body: const GeneralTab()
     );
   }
 }

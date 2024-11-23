@@ -64,7 +64,7 @@ class Items extends StatelessWidget {
                 child: icon!,
               )
             else
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Text(

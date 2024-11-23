@@ -8,11 +8,11 @@ class SocialSignInButton extends StatelessWidget {
   final bool isLoading;
 
   const SocialSignInButton({
-    Key? key,
+    super.key,
     required this.signInType,
     required this.onPressed,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class SocialSignInButton extends StatelessWidget {
         break;
       case SignInType.Apple:
         buttonText = 'Sign in with Apple';
-        buttonIcon = Icon(
+        buttonIcon = const Icon(
           Icons.apple,
           color: Colors.white,
           size: 24.0,

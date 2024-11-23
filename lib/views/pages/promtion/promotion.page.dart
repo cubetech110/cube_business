@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PromotionPage extends StatefulWidget {
-  const PromotionPage({Key? key}) : super(key: key);
+  const PromotionPage({super.key});
 
   @override
   _PromotionPageState createState() => _PromotionPageState();
@@ -55,7 +55,7 @@ class _PromotionPageState extends State<PromotionPage> {
     UserModel? currentUser = await AuthService().getCurrentUserData();
     if (currentUser == null || currentUser.storeId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: User or store not found')),
+        const SnackBar(content: Text('Error: User or store not found')),
       );
       return;
     }
@@ -79,7 +79,7 @@ class _PromotionPageState extends State<PromotionPage> {
       setState(() {}); // Update UI with the latest store data
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Upload successful!')),
+        const SnackBar(content: Text('Upload successful!')),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -126,7 +126,7 @@ class _PromotionPageState extends State<PromotionPage> {
                               _selectedImage = null;
                             });
                           },
-                          icon: Icon(Icons.close),
+                          icon: const Icon(Icons.close),
                           color: Colors.red,
                         ),
                       ),
@@ -159,7 +159,7 @@ class _PromotionPageState extends State<PromotionPage> {
                           : currentStore?.premotionUrl != null
                               ? Column(
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Current Promotion:',
                                       style: TextStyle(
                                           fontSize: 16,

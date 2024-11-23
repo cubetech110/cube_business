@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderListScreen extends StatefulWidget {
+  const OrderListScreen({super.key});
+
   @override
   _OrderListScreenState createState() => _OrderListScreenState();
 }
@@ -45,10 +47,10 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
             stream: getOrders('new'), // Fetch new orders
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Center(child: Text('No New Orders'));
+                return const Center(child: Text('No New Orders'));
               }
               return OrderListWidget(
                 orders: snapshot.data!,
@@ -64,10 +66,10 @@ class _OrderListScreenState extends State<OrderListScreen> with SingleTickerProv
             stream: getOrders('done'), // Fetch completed orders
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Center(child: Text('No Completed Orders'));
+                return const Center(child: Text('No Completed Orders'));
               }
               return OrderListWidget(
                 orders: snapshot.data!,
@@ -93,7 +95,7 @@ class OrderListWidget extends StatelessWidget {
   final Color trailingIconColor;
   final Color? trailingBackgroundColor;
 
-  const OrderListWidget({
+  const OrderListWidget({super.key, 
     required this.orders,
     required this.leadingIcon,
     required this.leadingIconColor,

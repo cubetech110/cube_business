@@ -82,7 +82,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
 
-    final double dropdownOffset = 50.0; // Adjust this value to move the dropdown further down
+    const double dropdownOffset = 50.0; // Adjust this value to move the dropdown further down
 
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
@@ -99,7 +99,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         return PopupMenuItem<CategoryType>(
           value: item,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey)),
             ),
             width: MediaQuery.of(context).size.width - 32, // Full width minus padding

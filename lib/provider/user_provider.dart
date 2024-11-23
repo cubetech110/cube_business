@@ -1,8 +1,5 @@
 import 'package:cube_business/core/helper/nav_helper.dart';
-import 'package:cube_business/services/user_service.dart';
 import 'package:cube_business/views/pages/auth/login_screen.dart';
-import 'package:cube_business/views/pages/home/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cube_business/model/user_model.dart';
 import 'package:cube_business/model/store_model.dart'; // Assuming you have a Store model

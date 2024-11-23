@@ -10,7 +10,7 @@ class AuthTextField extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const AuthTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.hintText,
@@ -18,7 +18,7 @@ class AuthTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     required this.icon,
     this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +34,19 @@ class AuthTextField extends StatelessWidget {
         fillColor: Colors.transparent, // خلفية الحقل
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.grey, // لون الحدود الافتراضي
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.grey, // لون الحدود في الوضع الافتراضي
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.black, // لون الحدود عند التركيز
             width: 2.0,
           ),

@@ -72,7 +72,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('About Us'),
             onTap: () {
-              navigateTo(context, AboutUs());
+              navigateTo(context, const AboutUs());
             },
           ),
           ListTile(
@@ -94,7 +94,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Policies and Terms'),
             onTap: () {
-              navigateTo(context,PoliciesAndTermsPage());
+              navigateTo(context,const PoliciesAndTermsPage());
             },
           ),
           ListTile(

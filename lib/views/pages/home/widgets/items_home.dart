@@ -38,7 +38,7 @@ class ItemsHome extends StatelessWidget {
                       child: const Icon(Icons.add, color: Colors.white),
                     ),
                     backgroundColor: Colors.black,
-                    onTap: () => navigateTo(context, AddProductScreen()),
+                    onTap: () => navigateTo(context, const AddProductScreen()),
                     value: '',
                   ),
                   Items(
@@ -63,7 +63,7 @@ class ItemsHome extends StatelessWidget {
                     backgroundColor: Colors.white,
                     progressColor: Colors.green,
                     progressValue: 1,
-                    onTap: () => navigateTo(context, ProductsListScreen()),
+                    onTap: () => navigateTo(context, const ProductsListScreen()),
                   ),
                   Items(
                     title: 'Orders',
@@ -91,7 +91,7 @@ class ItemsHome extends StatelessWidget {
                       child: const Icon(Icons.settings, color: Colors.black),
                     ),
                     backgroundColor: Colors.white,
-                    onTap: () => navigateTo(context, EditProfile()),
+                    onTap: () => navigateTo(context, const EditProfile()),
                     value: '',
                   ),
                   Items(
@@ -106,7 +106,7 @@ class ItemsHome extends StatelessWidget {
                     ),
                     backgroundColor: Colors.white,
                     progressValue: 0.0,
-                    onTap: () => navigateTo(context, PromotionPage()),
+                    onTap: () => navigateTo(context, const PromotionPage()),
                   ),
                 ],
               ),

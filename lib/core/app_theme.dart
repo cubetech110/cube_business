@@ -38,15 +38,15 @@ appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
       backgroundColor: AppColor.primaryColor,
     ),
     checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.all(AppColor.primaryColor),
-      checkColor: MaterialStateProperty.all(AppColor.accentColor),
+      fillColor: WidgetStateProperty.all(AppColor.primaryColor),
+      checkColor: WidgetStateProperty.all(AppColor.accentColor),
     ),
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(AppColor.primaryColor),
+      fillColor: WidgetStateProperty.all(AppColor.primaryColor),
     ),
     switchTheme: SwitchThemeData(
-      trackColor: MaterialStateProperty.all(AppColor.primaryColor.withOpacity(0.5)),
-      thumbColor: MaterialStateProperty.all(AppColor.primaryColor),
+      trackColor: WidgetStateProperty.all(AppColor.primaryColor.withOpacity(0.5)),
+      thumbColor: WidgetStateProperty.all(AppColor.primaryColor),
     ),
   );
 

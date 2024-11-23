@@ -160,7 +160,7 @@ class Auth_Provider with ChangeNotifier {
   void _navigateToHome(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
   }
 }

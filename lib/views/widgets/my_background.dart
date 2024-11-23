@@ -5,7 +5,7 @@ import 'dart:math' as math;
 class MyBackground extends StatefulWidget {
   final Widget child;
 
-  const MyBackground({Key? key, required this.child}) : super(key: key);
+  const MyBackground({super.key, required this.child});
 
   @override
   _MyBackgroundState createState() => _MyBackgroundState();

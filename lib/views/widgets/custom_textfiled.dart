@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:glowy_borders/glowy_borders.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;

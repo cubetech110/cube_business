@@ -8,7 +8,7 @@ class CustomDrawerHeader extends StatelessWidget {
   final String backgroundImage;
   final String avatarImage;
 
-  CustomDrawerHeader({
+  const CustomDrawerHeader({super.key, 
     required this.accountName,
     required this.accountEmail,
     required this.backgroundImage,
@@ -30,7 +30,7 @@ class CustomDrawerHeader extends StatelessWidget {
         
           ),
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,14 +39,14 @@ class CustomDrawerHeader extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                        backgroundImage: NetworkImage(userProvider!.currentStore!.logoUrl!),
+                        backgroundImage: NetworkImage(userProvider.currentStore!.logoUrl!),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userProvider!.currentStore!.name!,
+                          userProvider.currentStore!.name,
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.7),
                             fontSize: 18,
@@ -54,8 +54,8 @@ class CustomDrawerHeader extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          userProvider!.currentUser!.email!,
-                          style: TextStyle(
+                          userProvider.currentUser!.email!,
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14,
                           ),

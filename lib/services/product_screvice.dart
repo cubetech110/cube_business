@@ -39,7 +39,7 @@ class ProductService {
       await addProduct(product);
     } catch (e) {
       print('Error uploading image: $e');
-      throw e;
+      rethrow;
     }
   }
   // تحديث بيانات منتج موجود

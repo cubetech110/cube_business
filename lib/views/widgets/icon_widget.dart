@@ -6,7 +6,7 @@ class IconWidget extends StatelessWidget {
   final String iconPath;
   final bool isbgColor;
 
-  IconWidget({Key? key, required this.isbgColor,required this.bgColor, required this.iconPath}) : super(key: key);
+  const IconWidget({super.key, required this.isbgColor,required this.bgColor, required this.iconPath});
 
   bool isSvg(String path) {
     return path.endsWith('.svg');
