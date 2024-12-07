@@ -19,17 +19,14 @@ class StoreService {
     return null; // Return null if store not found
   }
 Future<void> addStore(Store store) async {
-  // إنشاء معرف فريد لـ storeId
+
   final String storeId = FirebaseFirestore.instance.collection('stores').doc().id;
 
-  // تحديث storeId في المستخدم الحالي
   await UserService().updateStoreId(storeId);
 
-  // تخزين بيانات المتجر باستخدام نفس storeId
   store.id = storeId;
   await storeCollection.doc(storeId).set(store.toFirestore());
 }
-  // Update store data
   Future<void> updateStore(String storeId, Map<String, dynamic> newData) async {
     try {
       await storeCollection.doc(storeId).update(newData);

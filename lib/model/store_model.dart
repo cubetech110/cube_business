@@ -9,7 +9,7 @@ class Store {
   DateTime createdAt;
   int visitorCount;
   String categories;
-  
+  bool aictived;
 String? logoUrl;
   Store({
      this.id,
@@ -19,9 +19,9 @@ String? logoUrl;
     required this.createdAt,
     required this.visitorCount,
     required this.categories, this.logoUrl,this.premotionUrl,
+    required this.aictived
   });
 
-  // تحويل المستند من Firestore إلى Store
   factory Store.fromFirestore(Map<String, dynamic> data, String id) {
     return Store(
       id: id,
@@ -33,11 +33,11 @@ String? logoUrl;
       categories: data['categories'],
       logoUrl: data['logoUrl'],
       premotionUrl: data['premotionUrl'],
+      aictived:data['aictived']??false
 
     );
   }
 
-  // تحويل Store إلى مستند قابل للتخزين في Firestore
   Map<String, dynamic> toFirestore() {
     return {
       'name': name,
@@ -47,7 +47,8 @@ String? logoUrl;
       'visitorCount': visitorCount,
       'categories': categories,
       'logoUrl': logoUrl,
-      'premotionUrl':premotionUrl
+      'premotionUrl':premotionUrl,
+      'actived':aictived
     };
   }
 }

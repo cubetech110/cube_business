@@ -1,5 +1,6 @@
 enum CategoryType {
-  Elegance,
+  Beauty,
+  Electronices,
   Food,
   Clothes,
 }

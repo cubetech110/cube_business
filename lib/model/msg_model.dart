@@ -1,6 +1,8 @@
 class Message {
   final String text;
-  final bool isUser; // true if message sent by user, false if received from bot
+  final bool isUser; 
 
   Message({required this.text, required this.isUser});
 }
+
+//msgModel ai bot

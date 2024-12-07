@@ -5,6 +5,7 @@ import 'package:cube_business/provider/user_provider.dart';
 import 'package:cube_business/provider/store_provider.dart';
 import 'package:cube_business/services/auth_service.dart';
 import 'package:cube_business/views/pages/auth/auth_wrapper.dart';
+import 'package:cube_business/views/pages/payment/payment_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Cube Business',
         theme: AppTheme.lightTheme,
-        home: const AuthWrapper(),
+        home: AuthWrapper()
         // locale: const Locale('ar'),
         // localizationsDelegates: const [
         //   GlobalMaterialLocalizations.delegate,

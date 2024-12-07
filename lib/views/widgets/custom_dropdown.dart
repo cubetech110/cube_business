@@ -27,8 +27,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
 
   // Map for translating enum to Arabic labels
   final Map<CategoryType, String> categoryLabels = {
-    CategoryType.Elegance: 'Elegance',
+    CategoryType.Electronices: 'Electronices',
     CategoryType.Food: 'Food',
+    CategoryType.Beauty:'Beauty',
     CategoryType.Clothes: 'Clothes',
   };
 

@@ -181,6 +181,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           visitorCount: 0,
           ownerId: FirebaseAuth.instance.currentUser!.uid,
           location: '',
+          aictived: false,
           logoUrl: _imageUrl, // Use the uploaded image URL
         );
 

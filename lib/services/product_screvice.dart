@@ -9,29 +9,27 @@ class ProductService {
 
   ProductService({required this.storeId});
 
-
-
-
   CollectionReference get productCollection {
     return FirebaseFirestore.instance
         .collection('stores')
         .doc(storeId)
         .collection('product');
-  } 
-  
-  
+  }
 
   Future<int> countProducts() async {
     QuerySnapshot snapshot = await productCollection.get();
     return snapshot.docs.length;
   }
+
   Future<void> addProduct(Product product) {
     return productCollection.doc(product.id).set(product.toFirestore());
   }
-    Future<bool> checkProductsAvailability() async {
+
+  Future<bool> checkProductsAvailability() async {
     QuerySnapshot snapshot = await productCollection.limit(1).get();
     return snapshot.docs.isNotEmpty;
   }
+
   Future<void> addProductWithImage(Product product, File imageFile) async {
     try {
       String imageUrl = await uploadImage(imageFile);
@@ -42,6 +40,7 @@ class ProductService {
       rethrow;
     }
   }
+
   // تحديث بيانات منتج موجود
   Future<void> updateProduct(Product product) {
     return productCollection.doc(product.id).update(product.toFirestore());
@@ -63,9 +62,13 @@ class ProductService {
 
   // جلب جميع المنتجات في المخزون
   Stream<List<Product>> getAllProducts() {
-    return productCollection.snapshots().map((snapshot) {
+    return productCollection
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) {
-        return Product.fromFirestore(doc.data() as Map<String, dynamic>, doc.id);
+        return Product.fromFirestore(
+            doc.data() as Map<String, dynamic>, doc.id);
       }).toList();
     });
   }

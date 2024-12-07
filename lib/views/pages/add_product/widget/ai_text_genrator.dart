@@ -4,7 +4,10 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:glowy_borders/glowy_borders.dart';
 
 class productDescriptionAI extends StatefulWidget {
-  const productDescriptionAI({super.key});
+
+
+  final TextEditingController productDescriptionController;
+  const productDescriptionAI({super.key, required this.productDescriptionController});
 
 
   @override
@@ -39,8 +42,7 @@ class _productDescriptionAIState extends State<productDescriptionAI> {
     setState(() {
       _sendingMessage = true;
     });
-
-    productDescriptionAIController.text = await reWrite(messageText);
+widget.productDescriptionController.text =await reWrite(messageText);
 
     setState(() {
       _sendingMessage = false;
@@ -52,7 +54,7 @@ class _productDescriptionAIState extends State<productDescriptionAI> {
     return  CustomTextField(
   label: 'Product Description',
   hintText: 'Enter a description for the product',
-  controller: productDescriptionAIController,
+  controller: widget.productDescriptionController,
   validator: (value) {
     if (value == null || value.isEmpty) {
       return 'Please enter the product description';

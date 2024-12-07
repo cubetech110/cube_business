@@ -91,17 +91,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           : AuthButton(
                               text: 'Log In',
                               onPressed: () async {
-                                await authProvider.signInWithEmailAndPassword(
+                               bool right  = await authProvider.signInWithEmailAndPassword(
                                   email: emailController.text,
                                   password: passwordController.text,
                                   context: context,
                                 );
+                                right?                       ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("correct!")),
+                      ):ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("خطا يا ثور")),);
+
                                 if (authProvider.currentUser != null) {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const EnterDetailsScreen(),
+                                          const HomeScreen(),
                                     ),
                                   );
                                 }

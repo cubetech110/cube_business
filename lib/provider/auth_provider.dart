@@ -58,40 +58,46 @@ class Auth_Provider with ChangeNotifier {
   }
 
   // Sign in with email and password
-  Future<void> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    // Check if fields are empty and show error message if necessary
-    if (email.isEmpty) {
-      _setErrorMessage("Email is required");
-      return;
-    } else if (password.isEmpty) {
-      _setErrorMessage("Password is required");
-      return;
-    }
-
-    _isLoading = true;
-    _errorMessage = null;
-    notifyListeners();
-
-    try {
-      _currentUser = await _authService.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      if (_currentUser != null) {
-        _navigateToHome(context);
-      }
-    } catch (e) {
-      _setErrorMessage("Failed to sign in: ${e.toString()}");
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
+Future<bool> signInWithEmailAndPassword({
+  required String email,
+  required String password,
+  required BuildContext context,
+}) async {
+  // Check if fields are empty and show error message if necessary
+  if (email.isEmpty) {
+    _setErrorMessage("Email is required");
+    return false; // Return false since sign-in failed
+  } else if (password.isEmpty) {
+    _setErrorMessage("Password is required");
+    return false; // Return false since sign-in failed
   }
+
+  _isLoading = true;
+  _errorMessage = null;
+  notifyListeners();
+
+  try {
+    _currentUser = await _authService.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    if (_currentUser != null) {
+      _navigateToHome(context);
+      return true; // Return true since sign-in succeeded
+    } else {
+      _setErrorMessage("Sign-in failed: User is null");
+      return false; // Return false since sign-in failed
+    }
+  } catch (e) {
+    _setErrorMessage("Failed to sign in: ${e.toString()}");
+    return false; // Return false since an exception occurred
+  } finally {
+    _isLoading = false;
+    notifyListeners();
+  }
+}
+
 
   // Sign in with Google
   Future<void> signInWithGoogle(BuildContext context) async {

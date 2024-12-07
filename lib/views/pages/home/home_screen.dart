@@ -1,5 +1,7 @@
+import 'package:cube_business/core/helper/nav_helper.dart';
 import 'package:cube_business/provider/user_provider.dart';
 import 'package:cube_business/views/pages/bot/bot_screen.dart';
+import 'package:cube_business/views/pages/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cube_business/views/pages/home/widgets/items_home.dart';
@@ -21,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<UserProvider>(context, listen: false).loadCurrentUser();
@@ -41,10 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    final currentUser = userProvider.currentUser;
 
     // If the currentUser or storeId is null, navigate to EnterDetailsScreen
-    if (currentUser == null || currentUser.storeId == null) {
+    if (userProvider.currentUser!.storeId == null) {
       return Scaffold(
           backgroundColor: Colors.grey[200], body: const EnterDetailsScreen());
     }
@@ -111,7 +113,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const ItemsHome(),
+                userProvider.currentStore!.aictived?
+                 ItemsHome():Center(child: ElevatedButton
+                 
+                 
+                 
+                 (
+                  style: ButtonStyle(backgroundColor:WidgetStatePropertyAll(Colors.black)),
+                  
+                  
+                  onPressed: (){navigateTo(context, PricingCard());}, child: Text('Subscripe', style: TextStyle(color: Colors.white),)))
               ],
             );
           },
